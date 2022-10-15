@@ -17,8 +17,12 @@ from django.contrib import admin
 from django.urls import path
 
 from ads import views
+from ads.views import AdsAPIList, AdAPIUpdate, CatsAPIList, CatAPIUpdate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.root),
+    path('ad/', AdsAPIList.as_view()),
+    path('ad/<int:pk>/', AdAPIUpdate.as_view()),
+    path('cat/', CatsAPIList.as_view()),
+    path('cat/<int:pk>/', CatAPIUpdate.as_view()),
 ]
