@@ -1,14 +1,21 @@
 import csv, json
 
-
 # Параметры
-csv_file_ads = 'ads.csv'
-json_file_ads = '../fixtures/ads.json'
-ads_model = 'ads.ad'
+csv_file_ad = 'ad.csv'
+json_file_ad = '../fixtures/ad.json'
+ad_model = 'ads.ad'
 
-csv_file_catetories = 'categories.csv'
-json_file_categories = '../fixtures/categories.json'
-categories_model = 'ads.category'
+csv_file_category = 'category.csv'
+json_file_category = '../fixtures/category.json'
+category_model = 'ads.category'
+
+csv_file_location = 'location.csv'
+json_file_location = '../fixtures/location.json'
+location_model = 'users.location'
+
+csv_file_user = 'user.csv'
+json_file_user = '../fixtures/user.json'
+users_model = 'users.user'
 
 
 # Функция конвертации
@@ -22,10 +29,9 @@ def csv_to_json(csv_file_path: str, json_file_path: str, model: str) -> str:
         data: list = [
             {'model': model,
              'pk': int(row['id']) if row.get('id') else int(row['Id']),
-             'fields': {
-                 key: replace_values(value) for key, value in row.items() if key != 'id' and key != 'Id'}
-             }
+             'fields': {key: replace_values(value) for key, value in row.items() if key != 'id' and key != 'Id'}}
             for row in reader
+
         ]
 
     # создать новый файл json и записать данные
@@ -47,5 +53,7 @@ def replace_values(value):
 
 
 if __name__ == '__main__':
-    print(csv_to_json(csv_file_ads, json_file_ads, ads_model))
-    print(csv_to_json(csv_file_catetories, json_file_categories, categories_model))
+    print(csv_to_json(csv_file_ad, json_file_ad, ad_model))
+    print(csv_to_json(csv_file_category, json_file_category, category_model))
+    print(csv_to_json(csv_file_location, json_file_location, location_model))
+    print(csv_to_json(csv_file_user, json_file_user, users_model))

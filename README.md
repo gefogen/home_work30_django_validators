@@ -3,6 +3,6 @@
 Доступные маршруты и методы:
 
 - /ad/ - GET, POST
-- /ad/3 - GET
+- /ad/1 - GET
 - /cat/ - GET, POST
-- /cat/3/ - GET
+- /cat/1 - GET
