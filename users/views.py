@@ -15,7 +15,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """ Для списка пользователей """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAdminUser,)
+    # permission_classes = (IsAdminUser,)
 
     @action(methods=['GET'], detail=False)  # detail - Для списка записей, если True -тогда одна запись.
     def total_ads(self, request):

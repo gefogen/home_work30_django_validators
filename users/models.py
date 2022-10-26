@@ -1,3 +1,4 @@
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 
@@ -24,7 +25,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=100, null=True, verbose_name='Имя')
     last_name = models.CharField(max_length=150, null=True, verbose_name='Фамилия')
     username = models.CharField(max_length=20, unique=True, verbose_name='Никнейм')
-    password = models.CharField(max_length=200)
+    password = models.CharField(max_length=200, validators=[MinLengthValidator(5)])
     role = models.CharField(max_length=10, choices=ROLES, default='member', verbose_name='Роль')
     age = models.PositiveIntegerField(verbose_name='Возраст')
     location = models.ManyToManyField(Location)

@@ -17,7 +17,6 @@ class Ad(models.Model):
     author = models.CharField(max_length=30)
     price = models.PositiveIntegerField()
     description = models.TextField(max_length=5000, null=True)
-    address = models.CharField(max_length=50)
     is_published = models.BooleanField(default=False)
     image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True, verbose_name='Фото')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
@@ -25,6 +24,7 @@ class Ad(models.Model):
     class Meta:
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'
+        ordering = ['-price']
 
     def __str__(self):
         return self.name
