@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from django.db.models import Count
 from django.http import JsonResponse
 from rest_framework import viewsets
@@ -15,7 +13,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """ Для списка пользователей """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    # permission_classes = (IsAdminUser,)
+    permission_classes = (IsAdminUser, )
 
     @action(methods=['GET'], detail=False)  # detail - Для списка записей, если True -тогда одна запись.
     def total_ads(self, request):
@@ -33,3 +31,4 @@ class LocationViewSet(viewsets.ModelViewSet):
     """ Для списка локаций """
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+    permission_classes = (IsAdminUser, )

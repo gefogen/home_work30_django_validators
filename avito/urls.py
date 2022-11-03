@@ -24,7 +24,6 @@ from avito import settings
 from users.views import UserViewSet, LocationViewSet
 
 router = routers.SimpleRouter()
-router.register(r'ad', AdViewSet)  # basename='ads')
 router.register(r'cat', CatViewSet)
 router.register(r'user', UserViewSet)
 router.register(r'location', LocationViewSet)
@@ -33,7 +32,18 @@ router.register(r'location', LocationViewSet)
 urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('ad/', AdListView.as_view()),
+    path('ad/<int:pk>/', AdDetailView.as_view()),
+    path('ad/<int:pk>/update/', AdUpdateView.as_view()),
+    path('ad/<int:pk>/upload_image/', AdImageView.as_view()),
+    path('ad/<int:pk>/delete/', AdDeleteView.as_view()),
+    path('ad/create/', AdCreateView.as_view()),
+    path('selection/', SelectionListView.as_view()),
+    path('selection/<int:pk>/', SelectionDetailView.as_view()),
+    path('selection/<int:pk>/update/', SelectionUpdateView.as_view()),
+    path('selection/<int:pk>/delete/', SelectionDeleteView.as_view()),
+    path('selection/create/', SelectionCreateView.as_view()),
 ]
 
 if settings.DEBUG:

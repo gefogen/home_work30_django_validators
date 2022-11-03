@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -25,6 +26,19 @@ class Ad(models.Model):
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'
         ordering = ['-price']
+
+    def __str__(self):
+        return self.name
+
+
+class Selection(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=100)
+    items = models.ManyToManyField(Ad)
+
+    class Meta:
+        verbose_name = 'Подборка'
+        verbose_name_plural = 'Подборки'
 
     def __str__(self):
         return self.name
