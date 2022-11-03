@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-from users.models.user import User
+from users.models import User
 
 
 class IsCreatedByOrAdminOrModerator(permissions.BasePermission):
