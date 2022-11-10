@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView, TokenRefreshView
 
 from ads.views import *
 from avito import settings
@@ -44,6 +45,9 @@ urlpatterns = [
     path('selection/<int:pk>/update/', SelectionUpdateView.as_view()),
     path('selection/<int:pk>/delete/', SelectionDeleteView.as_view()),
     path('selection/create/', SelectionCreateView.as_view()),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/auth', TokenVerifyView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 if settings.DEBUG:
