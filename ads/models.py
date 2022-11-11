@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator, MaxLengthValidator, MinValueValidator
 from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=30, db_index=True)
+    name = models.CharField(max_length=20, db_index=True)
+    slug = models.SlugField(null=True, unique=True, validators=[MinLengthValidator(5), MaxLengthValidator(10)])
 
     class Meta:
         verbose_name = 'Категория'
@@ -14,9 +16,9 @@ class Category(models.Model):
 
 
 class Ad(models.Model):
-    name = models.CharField(max_length=49, verbose_name='Наименование')
+    name = models.CharField(max_length=49, verbose_name='Наименование', validators=[MinLengthValidator(10)])
     author = models.CharField(max_length=30)
-    price = models.PositiveIntegerField()
+    price = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0)])
     description = models.TextField(max_length=5000, null=True)
     is_published = models.BooleanField(default=False)
     image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True, verbose_name='Фото')

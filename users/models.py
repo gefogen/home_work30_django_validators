@@ -1,6 +1,8 @@
 from django.core.validators import MinLengthValidator
 from django.db import models
 
+from validators.users import check_age
+
 
 class Location(models.Model):
     name = models.CharField(max_length=50)
@@ -32,6 +34,8 @@ class User(models.Model):
     role = models.CharField(max_length=10, choices=ROLES, default='member', verbose_name='Роль')
     age = models.PositiveIntegerField(verbose_name='Возраст')
     location = models.ManyToManyField(Location)
+    birth_date = models.DateField(null=True, max_length=3, validators=[check_age])
+    email = models.EmailField(null=True, unique=True)
 
     class Meta:
         verbose_name = 'Пользователь'

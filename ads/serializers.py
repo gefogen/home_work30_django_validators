@@ -3,9 +3,11 @@ from rest_framework.generics import get_object_or_404
 
 from ads.models import Ad, Selection, Category
 from users.models import User
+from validators import check_not_published
 
 
 class AdSerializer(serializers.ModelSerializer):
+    is_published = serializers.BooleanField(default=None, validators=[check_not_published])
     author = serializers.SlugRelatedField(
         required=False,
         queryset=User.objects.all(),
